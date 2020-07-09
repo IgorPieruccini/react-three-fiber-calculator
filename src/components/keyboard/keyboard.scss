@@ -1,0 +1,11 @@
+.keyboard {
+  display: grid;
+  grid-template: repeat(5, 1fr) / repeat(4, 1fr);
+  grid-gap: 2px;
+  .btn-0 {
+    grid-column: span 2;
+  }
+  .btn-c {
+    grid-column: span 3;
+  }
+}
