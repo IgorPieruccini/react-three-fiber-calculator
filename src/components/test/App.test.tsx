@@ -92,4 +92,14 @@ describe("Display test", () => {
     fireEvent.click(getByText("="));
     displayTextByText("13");
   });
+
+  it("disable sign buttons", () => {
+    const { getByText } = render(<App />);
+    expect(getByText("x").hasAttribute("disabled")).toBeTruthy();
+    expect(getByText("+").hasAttribute("disabled")).toBeFalsy();
+    fireEvent.click(getByText("1"));
+    fireEvent.click(getByText("+"));
+    expect(getByText("+").hasAttribute("disabled")).toBeTruthy();
+    expect(getByText("=").hasAttribute("disabled")).toBeTruthy();
+  });
 });

@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useState } from "react";
 import "./keyboard.scss";
 
 export type IKeyBoardButton = keyof typeof keyboardButtons;
@@ -22,6 +22,9 @@ export const keyboardButtons = {
   18: "=",
 };
 
+const initialDisabledButtons = ["÷", "x", "="];
+const allOperationButton = ["÷", "x", "+", "-", "="];
+
 interface KeyboardProps {
   onNumber(t: string): void;
   onSign(): void;
@@ -32,6 +35,36 @@ const Keyboard: FunctionComponent<KeyboardProps> = ({
   onSign,
   onClear,
 }: KeyboardProps) => {
+  const [disabledButtons, setDisabledButton] = useState<Array<string>>(
+    initialDisabledButtons
+  );
+
+  const onHandleClick = (val: string) => {
+    switch (val) {
+      case "=":
+        onSign();
+        break;
+      case "c":
+        onClear();
+        setDisabledButton(initialDisabledButtons);
+        break;
+      case "+":
+      case "-":
+      case "x":
+      case "÷":
+        setDisabledButton(allOperationButton);
+        onNumber(val);
+        break;
+      default:
+        onNumber(val);
+        setDisabledButton([]);
+    }
+  };
+
+  const isDisabled = (val: string) => {
+    return !!disabledButtons.find((disabled) => disabled === val);
+  };
+
   return (
     <div data-testid="keyboard" className={"keyboard"}>
       {Object.values(keyboardButtons).map((val) => {
@@ -39,9 +72,8 @@ const Keyboard: FunctionComponent<KeyboardProps> = ({
           <button
             className={`btn-${val}`}
             key={val}
-            onClick={() =>
-              val === "=" ? onSign() : val === "c" ? onClear() : onNumber(val)
-            }
+            onClick={() => onHandleClick(val)}
+            disabled={isDisabled(val)}
           >
             {val}
           </button>
