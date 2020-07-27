@@ -4,6 +4,7 @@ import {
   waitForElement,
   fireEvent,
   within,
+  getByAltText,
 } from "@testing-library/react";
 import App from "../App";
 import { keyboardButtons } from "../keyboard/Keyboard";
@@ -101,5 +102,16 @@ describe("Display test", () => {
     fireEvent.click(getByText("+"));
     expect(getByText("+").hasAttribute("disabled")).toBeTruthy();
     expect(getByText("=").hasAttribute("disabled")).toBeTruthy();
+  });
+
+  it("start calc using operation", () => {
+    const { getByText, queryByTestId } = render(<App />);
+    fireEvent.click(getByText("-"));
+    fireEvent.click(getByText("2"));
+    fireEvent.click(getByText("+"));
+    fireEvent.click(getByText("3"));
+    expect(queryByTestId("display")?.textContent).toEqual("-2+3");
+    fireEvent.click(getByText("="));
+    expect(queryByTestId("display")?.textContent).toEqual("1");
   });
 });

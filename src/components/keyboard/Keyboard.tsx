@@ -23,7 +23,7 @@ export const keyboardButtons = {
 };
 
 const initialDisabledButtons = ["÷", "x", "="];
-const allOperationButton = ["÷", "x", "+", "-", "="];
+export const allOperationButton = ["÷", "x", "+", "-", "="];
 
 interface KeyboardProps {
   onNumber(t: string): void;
