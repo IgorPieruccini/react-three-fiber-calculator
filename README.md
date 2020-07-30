@@ -2,10 +2,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Description
 
-The purpose of this project is to training writing test before creating react components and code it self.
-Testing driven code lead you to create a better code, think and validate the architecture.
-Save test time when writing complex components and ensure the test coverage reducing the chances of users finding bugs for you. 🤘
-[testing-library](https://testing-library.com/).
+3D Calculator using React Three Fiber . The purpose of this project is to learn how to use [React-three-fiber](https://github.com/react-spring/react-three-fiber), using a project that already have all the logic of a calculator [Calculator-Project](https://github.com/IgorPieruccini/jest-calculator).
 
 ## Available Scripts
 
